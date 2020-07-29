@@ -53,16 +53,17 @@ def remove_players(old_players):
     return f'Removed {old_players}!'
 
 
-async def hide_and_seek(message, hide_timer, seek_timer):
-    msg = await message.channel.send('Hide!')
-    for i in range(int(hide_timer)):
+async def timer(message, name, seconds):
+    for i in range(int(seconds)):
         time.sleep(1)
-        await msg.edit(content=f'Hide timer: {i + 1}')
+        await message.edit(content=f'{name} timer: {i + 1}')
 
-    for i in range(int(seek_timer)):
-        time.sleep(1)
-        await msg.edit(content=f'Seek timer: {i + 1}')
-    await msg.edit(content="Time's up!")
+
+async def hide_and_seek(message, hide_timer, seek_timer):
+    message = await message.channel.send('Hide!')
+    timer(message, 'Hide', hide_timer)
+    timer(message, 'Seek', seek_timer)
+    await message.edit(content="Time's up!")
 
 
 @client.event
