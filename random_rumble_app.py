@@ -1,6 +1,5 @@
 import os
 import random
-import time
 
 import discord
 from dotenv import load_dotenv
@@ -53,19 +52,6 @@ def remove_players(old_players):
     return f'Removed {old_players}!'
 
 
-async def timer(message, name, seconds):
-    for i in range(int(seconds)):
-        time.sleep(1)
-        await message.edit(content=f'{name} timer: {i + 1}')
-
-
-async def hide_and_seek(message, hide_timer, seek_timer):
-    message = await message.channel.send('Hide!')
-    timer(message, 'Hide', hide_timer)
-    timer(message, 'Seek', seek_timer)
-    await message.edit(content="Time's up!")
-
-
 @client.event
 async def on_ready():
     guild = discord.utils.get(client.guilds, name=GUILD)
@@ -111,13 +97,7 @@ async def on_message(message):
             f'Remove players = "!rp <player> <player> <player>..."\n'
             f'Show players = "!lp"\n'
             f'Reset players = "!reset"'
-            f'Hide and seek = "!hs <hide timer> <seek timer> in seconds'
         )
-
-    elif message.content.startswith('!hs '):
-        timers = message.content.split()
-        await hide_and_seek(message, timers[1], timers[2])
-        return
 
     else:
         return
