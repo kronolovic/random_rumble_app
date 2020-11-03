@@ -1,4 +1,8 @@
 Requires a '.env'-file  in the same directory containing the following
 
     DISCORD_TOKEN={discord_token}
-    DISCORD_GUILD={server_name}
+    DISCORD_GUILD={server_name
+
+Hej prajm. 
+
+}
